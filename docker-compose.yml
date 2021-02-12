@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+   app:
+     build: ./php
+     container_name: app
+     volumes:
+       - ./src:/var/www/html
+     depends_on:
+       - mysql
+       - redis
+
+   mysql:
+     image: mysql:5.7.32
+     container_name: mysql
+     command: --innodb-use-native-aio=0
+     restart: always
+     ports:
+       - "3306:3306"
+     volumes:
+       - "./db-mysql/dbdata:/var/lib/mysql"
+     environment:
+       - MYSQL_DATABASE= app
+       - MYSQL_ROOT_PASSWORD= root
+  
+   redis:
+     image: redis:alpine
+     container_name: redis
+     expose:
+       - 6379
+
+   nginx:
+     build: ./nginx
+     container_name: nginx
+     restart: always
+     ports:
+       - "80:80"
+     volumes:
+       - "./src:/var/www/html"
+     depends_on:
+       - app
+     environment:
+       VIRTUAL_HOST: app.local,app2.local
