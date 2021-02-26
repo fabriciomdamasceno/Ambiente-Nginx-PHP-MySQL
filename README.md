@@ -24,31 +24,33 @@ Após ter instalado o Docker e Docker-compose, segue os procedimentos:
 
    **Linux:** _/etc/hosts_
 
-    `127.0.0.1 app.local`
+    `127.0.0.1 php.local`
  
-    `127.0.0.1 app2.local`
+    `127.0.0.1 laravel.local`
    
-6. Acessar o container PHP para instalar o Laravel Framework
+6. Acessar o container PHP para instalar novos projetos Laravel ou atualizar via composer.
    `docker exec -it app bash`
    
-   Dentro do container PHP, acessar no diretório _/var/www/html/app_ e execute 
+   Dentro do container PHP, ao digitar pwd você pode constatar que você está no diretório _/var/www/html/_.
 
-   `rm .gitignore`
+   Você pode acessar o diretório `laravel` através do comando `cd laravel` e digitar `composer update` para baixar e atualizar as dependencias do projeto Laravel.
 
-   `composer create-project --prefer-dist laravel/laravel .`
+   Para criar um novo projeto laravel, basta digitar o comando abaixo em _/var/www/html_
+
+   `composer create-project --prefer-dist laravel/laravel Nome_Do_Projeto`
    
-7. No browser acesse [http://app.local](http://app.local)
+7. No browser acesse [http://php.local](http://php.local) ou [http://laravel.local](http://laravel.local)
 
-8. Esse ambiente de desenvolvido inclui 2 Vhosts no Nginx de exemplo para 2 projetos, mas pode ter N vhosts, basta reutilizar o arquivo _vhost.conf_ para o novo arquivo, alterando o _server_name_ e adicionar no _Dockerfile_ do PHP. Lembrar de adicionar no arquivo hosts para cada Vhost do projeto.
+8. Esse ambiente de desenvolvido inclui 2 Vhosts no Nginx de exemplo para 2 projetos, mas pode ter N vhosts, basta reutilizar um dos arquivos de acordo com a necessidade do seu novo projeto. Para isso, basta renomear o arquivo _php.conf_ ou _laravel.conf_ para o novo arquivo, alterando o _server_name_ e adicionar no _Dockerfile_ do PHP. Lembrar de adicionar no arquivo hosts para cada Vhost do projeto.
 
-9. No Linux para ter permissão no volume _src/app_ e _src/app2_, acessa até o diretório do ambiente e execute:
+9. No Linux para ter permissão no volume _src/php_ e _src/laravel_, acessa até o diretório do ambiente e execute:
 
-   `sudo chown -R $(whoami):$(whoami) src/app` 
+   `sudo chown -R $(whoami):$(whoami) src/php` 
 
-   `sudo chown -R $(whoami):$(whoami) src/app2`
+   `sudo chown -R $(whoami):$(whoami) src/laravel`
   
-10. No Laravel Framework precisa editar o _src/app/.env_ em _APP_NAME=_ para _app.local_ que nesse caso é o ServerName definido no Vhost. Para os demais Vhosts que houver também.
+10. No Laravel Framework precisa editar o _src/laravel/.env_ em _APP_NAME=_ para _laravel.local_ que nesse caso é o ServerName definido no Vhost. Para os demais Vhosts que houver também.
 
-Feito!
+Prontinho!
 
 
