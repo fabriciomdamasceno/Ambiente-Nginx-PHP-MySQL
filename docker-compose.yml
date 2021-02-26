@@ -20,7 +20,7 @@ services:
      volumes:
        - "./db-mysql/dbdata:/var/lib/mysql"
      environment:
-       - MYSQL_DATABASE=app
+       - MYSQL_DATABASE=laravel
        # Favor usar uma senha mais segura quando for colocar em produção.
        - MYSQL_ROOT_PASSWORD=r00t
   

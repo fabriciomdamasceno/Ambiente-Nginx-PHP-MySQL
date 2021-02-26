@@ -51,6 +51,8 @@ Após ter instalado o Docker e Docker-compose, segue os procedimentos:
   
 10. No Laravel Framework precisa editar o _src/laravel/.env_ em _APP_NAME=_ para _laravel.local_ que nesse caso é o ServerName definido no Vhost. Para os demais Vhosts que houver também.
 
+11. Para acessar a Base de Dados é simples. Basta usar qualquer Software de Acesso da sua máquina local com a senha de acesso que está no arquivo docker-compose.yml que está na raiz desse projeto.
+
 Prontinho!
 
 
